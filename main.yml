@@ -1,19 +1,19 @@
-# tasks file for myapache
+# tasks file for loadbalancer
 
-- name: Install pacakges
+- name: "Install package"
   package:
-          name: "httpd"
-          state: present
-  package:
-          name: "php"
+          name: "haproxy"
           state: present
 
-- name: "Copy web-page in dest"
-  copy:
-          src: "/root/Ansible-Role/myapache/files/index.php"
-          dest: "/var/www/html/index.php"
+- name: "Copy Template file Name haproxy.cfg"
+  template:
+          src: "/root/Ansible-Playbook/HA-Proxy/Haproxy-with-role/haproxy.cfg"
+          dest: "/etc/haproxy/haproxy.cfg"
 
-- name: "Start the services"
+- name: "restart haproxy"
   service:
-          name: "httpd"
-          state: started
+     name: "haproxy"
+     state: "started"
+
+
+
